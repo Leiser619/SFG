@@ -1,0 +1,72 @@
+Baza:
+
+
+User
+        id
+        email
+        password_hash
+
+
+Postac
+        id
+        avatar
+        name
+        health
+        magic
+        attack_speed
+        shield
+        speed
+        luck
+        attack
+        backpack_space
+        spell_space
+        weapon <List>
+        spell <List>
+        exp
+        level
+
+weapon
+        id
+        avatar
+        attack
+        health
+        magic
+        attack_speed
+        shield
+        speed
+        luck
+
+
+spell_scroll
+        id
+        avatar
+        attack
+        health
+        magic
+        attack_speed
+        shield
+        speed
+        luck
+        additional_action
+
+
+enemy
+            id
+            name
+            health
+            magic
+            attack_speed
+            shield
+            luck
+            attack
+            belonging
+            backpack_space
+            spell_space
+            place_id
+            weapon <List>
+            spell <List>
+
+place
+    id
+    name
+    locations
