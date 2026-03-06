@@ -6,6 +6,7 @@ public record MyHeroesResponses(
 
         @NotBlank String name,
         @NotBlank int exp
+//        @NotBlank byte[] avatar;
 ) {
 
 }

@@ -8,13 +8,16 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name="Hero")
-public class MyHero {
+public class Hero {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
 
     @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
+    private byte[] avatar;
 
     @Column(nullable = false)
     private int speed;
