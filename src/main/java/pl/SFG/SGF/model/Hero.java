@@ -3,6 +3,7 @@ package pl.SFG.SGF.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import pl.SFG.SGF.dto.hero.HeroClass;
 
 @Entity
 @Getter
@@ -15,6 +16,9 @@ public class Hero {
 
     @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false, name="hero_class")
+    private HeroClass heroClass;
 
     @Column(nullable = false)
     private byte[] avatar;
@@ -31,6 +35,9 @@ public class Hero {
     @Column(nullable = false,name="spell_space")
     private int spellSpace;
 //combat variables
+
+    @Column(nullable = false,name="owner_id")
+    private Long ownerId;
 
     @Column(nullable = false)
     private int health;

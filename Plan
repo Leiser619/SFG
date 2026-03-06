@@ -94,5 +94,6 @@ CREATE TABLE Hero (
     shield INT NOT NULL,
     magic INT NOT NULL,
     luck INT NOT NULL,
-    avatar BYTEA NOT NULL
+    avatar BYTEA NOT NULL,
+    owner_id BIGSERIAL NOTNULL
 );
