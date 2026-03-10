@@ -19,7 +19,8 @@ public class Hero {
 
     @Column(nullable = false, name="hero_class")
     private HeroClass heroClass;
-
+    @Basic(fetch = FetchType.LAZY)
+    @Lob //large object
     @Column(nullable = false)
     private byte[] avatar;
 
