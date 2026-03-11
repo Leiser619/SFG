@@ -1,13 +1,11 @@
 package pl.SFG.SGF.api;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.SFG.SGF.dto.hero.MyHeroesResponses;
-import pl.SFG.SGF.model.Hero;
 import pl.SFG.SGF.security.UserPrincipal;
 import pl.SFG.SGF.service.ProfileService;
 
@@ -23,6 +21,11 @@ public class ProfileController {
     public List<MyHeroesResponses> getMyHero(@AuthenticationPrincipal UserPrincipal userPrincipal){
         return profileService.getMyHeroes(userPrincipal.getId());
     };
+//    @PostMapping
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public MyHeroesResponses add(@AuthenticationPrincipal UserPrincipal principal, @Valid@RequestBody Read){
+//
+//    }
 
 
 }

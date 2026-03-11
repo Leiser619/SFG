@@ -2,7 +2,7 @@ package pl.SFG.SGF.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import pl.SFG.SGF.model.Hero;
+import pl.SFG.SGF.model.hero.Hero;
 
 import java.util.List;
 

@@ -9,7 +9,8 @@ public record MyHeroesResponses(
 
         @NotBlank String name,
         @Positive int exp,
-        @NotNull byte[] avatar
+        @NotNull byte[] avatar,
+        @NotBlank HeroClass heroClass
 ) {
 
 }

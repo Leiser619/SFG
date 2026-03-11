@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.SFG.SGF.dto.hero.MyHeroesResponses;
-import pl.SFG.SGF.model.Hero;
+import pl.SFG.SGF.model.hero.Hero;
 import pl.SFG.SGF.repository.HeroRepository;
 
 import java.util.List;
@@ -27,7 +27,8 @@ public class ProfileService {
         return new MyHeroesResponses(
                 h.getName(),
                 h.getExp(),
-                h.getAvatar()
+                h.getAvatar(),
+                h.getHeroClass()
         );
     }
 }
