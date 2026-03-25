@@ -3,9 +3,14 @@ package pl.SFG.SGF.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.SFG.SGF.dto.hero.MyHeroesProjection;
 import pl.SFG.SGF.dto.hero.MyHeroesResponses;
+import pl.SFG.SGF.model.User;
 import pl.SFG.SGF.model.hero.Hero;
+import pl.SFG.SGF.repository.HeroClassStatsRepository;
 import pl.SFG.SGF.repository.HeroRepository;
+import pl.SFG.SGF.repository.UserRepository;
+import pl.SFG.SGF.security.UserPrincipal;
 
 import java.util.List;
 
@@ -13,22 +18,25 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProfileService {
     private final HeroRepository heroRepository;
+    private final UserRepository userRepository;
     @Transactional(readOnly = true)
-    public List<MyHeroesResponses> getMyHeroes(Long userId){
-        return heroRepository.findAllByOwnerId(userId)
-                .stream()
-                .map(ProfileService::toResponse)
-                .toList();
+    public List<MyHeroesProjection> getMyHeros(Long userId){
+        return heroRepository.findMyHeroes(userId);
     }
 
 
+    @Transactional
+    public MyHeroesResponses save(MyHeroesResponses myHeroesResponses, Long userId){
+        User user = userRepository.getReferenceById(userId);
+        Hero hero=new Hero();
+        hero.setName(myHeroesResponses.name());
+        hero.setExp(0);
+        hero.setHeroClass(myHeroesResponses.heroClass());
+        hero.setOwner(user);
+        heroRepository.save(hero);
 
-    private static MyHeroesResponses toResponse(Hero h) {
-        return new MyHeroesResponses(
-                h.getName(),
-                h.getExp(),
-                h.getAvatar(),
-                h.getHeroClass()
-        );
+        return new MyHeroesResponses(hero.getName(), hero.getExp(), hero.getHeroClass(),"url");
     }
+
+
 }

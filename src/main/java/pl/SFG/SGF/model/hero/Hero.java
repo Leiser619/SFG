@@ -19,10 +19,9 @@ public class Hero {
 
     @Enumerated(EnumType.STRING)
     private HeroClass heroClass;
-
-    private int level;
     private int exp;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="owner_id")
     private User owner;
 }

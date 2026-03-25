@@ -1,10 +1,8 @@
--- V2__hero_class.sql
-
--- 1 najpierw tworzymy tabele klas
+-- V2__heroclass.sql
 
 CREATE TABLE hero_class_stats (
     hero_class VARCHAR(50) PRIMARY KEY,
-
+    avatar_url VARCHAR(255) NOT NULL,
     base_health INT NOT NULL,
     base_attack INT NOT NULL,
     base_magic INT NOT NULL,
@@ -39,8 +37,10 @@ DROP COLUMN attack_speed,
 DROP COLUMN shield,
 DROP COLUMN magic,
 DROP COLUMN luck,
-DROP COLUMN speed;
-
+DROP COLUMN speed,
+DROP COLUMN backpack_space,
+DROP COLUMN spell_space,
+DROP COLUMN avatar;
 
 ALTER TABLE hero
 ADD CONSTRAINT fk_hero_class
