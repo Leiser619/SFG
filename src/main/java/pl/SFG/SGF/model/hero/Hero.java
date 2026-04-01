@@ -6,6 +6,9 @@ import lombok.Setter;
 import pl.SFG.SGF.dto.hero.HeroClass;
 import pl.SFG.SGF.model.User;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -24,4 +27,7 @@ public class Hero {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="owner_id")
     private User owner;
+
+    @OneToMany(mappedBy = "hero", cascade = CascadeType.ALL)
+    private List<HeroBackpack> items = new ArrayList<>();
 }

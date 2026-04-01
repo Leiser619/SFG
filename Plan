@@ -115,3 +115,6 @@ base_luck,base_backpack_space,base_spell_space)VALUES
 
 DROP SCHEMA public CASCADE;
 CREATE SCHEMA public;
+
+
+loader do ladowania danych do walki zeby niepotrzebnie nie tworzyc wielu takich samych zapytan
