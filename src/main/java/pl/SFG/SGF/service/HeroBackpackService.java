@@ -11,10 +11,18 @@ import pl.SFG.SGF.repository.HeroBackpackRepository;
 @RequiredArgsConstructor
 public class HeroBackpackService {
     private final HeroBackpackRepository heroBackpackRepository;
-//
-//    @Transactional
-//    public void equipItem(Long heroItemId) {
-//        HeroBackpack heroItem = heroBackpackRepository.findById(heroItemId).orElseThrow();
-//        heroItem.setEquipped(true);
-//    }
+
+    @Transactional
+    public void equipItem(Long heroItemId) {
+        HeroBackpack heroItem = heroBackpackRepository.findById(heroItemId).orElseThrow();
+
+        Long heroId = heroItem.getHero().getId();
+        ItemTypeEnum type = heroItem.getItem().getType();
+
+        if (heroBackpackRepository.existsByHeroIdAndItem_TypeAndEquippedTrue(heroId, type)) {
+            throw new RuntimeException("Item tego typu już założony");
+        }
+
+        heroItem.setEquipped(true);
+    }
 }

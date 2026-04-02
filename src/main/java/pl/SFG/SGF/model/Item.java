@@ -1,9 +1,14 @@
 package pl.SFG.SGF.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import pl.SFG.SGF.dto.ItemTypeEnum;
 
 @Entity
+@Setter
+@Getter
 public class Item {
 
     @Id
