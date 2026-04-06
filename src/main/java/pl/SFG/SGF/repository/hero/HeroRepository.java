@@ -1,11 +1,10 @@
-package pl.SFG.SGF.repository;
+package pl.SFG.SGF.repository.hero;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import pl.SFG.SGF.dto.hero.MyHeroesProjection;
-import pl.SFG.SGF.dto.hero.MyHeroesResponses;
 import pl.SFG.SGF.model.hero.Hero;
 
 import java.util.List;

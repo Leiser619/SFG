@@ -1,7 +1,6 @@
-package pl.SFG.SGF.model;
+package pl.SFG.SGF.model.game;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import pl.SFG.SGF.dto.ItemTypeEnum;

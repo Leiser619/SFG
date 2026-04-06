@@ -3,6 +3,7 @@ package pl.SFG.SGF.security;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import pl.SFG.SGF.model.Role;
 
 import java.util.Collection;
 import java.util.List;
@@ -12,15 +13,19 @@ public class UserPrincipal implements UserDetails {
     private final Long id;
     private final String email;
     private final String passwordHash;
+    private final Role role;
 
-    public UserPrincipal(Long id, String email, String passwordHash) {
+    public UserPrincipal(Long id, String email, String passwordHash, Role role) {
         this.id = id;
         this.email = email;
         this.passwordHash = passwordHash;
+        this.role=role;
     }
 
 
-    @Override public Collection<? extends GrantedAuthority> getAuthorities() { return List.of(); }
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(() -> role.name());
+    }
     @Override public String getPassword() { return passwordHash; }
     @Override public String getUsername() { return email; }
     @Override public boolean isAccountNonExpired() { return true; }

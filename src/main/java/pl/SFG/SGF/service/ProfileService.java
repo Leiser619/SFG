@@ -7,10 +7,8 @@ import pl.SFG.SGF.dto.hero.MyHeroesProjection;
 import pl.SFG.SGF.dto.hero.MyHeroesResponses;
 import pl.SFG.SGF.model.User;
 import pl.SFG.SGF.model.hero.Hero;
-import pl.SFG.SGF.repository.HeroClassStatsRepository;
-import pl.SFG.SGF.repository.HeroRepository;
+import pl.SFG.SGF.repository.hero.HeroRepository;
 import pl.SFG.SGF.repository.UserRepository;
-import pl.SFG.SGF.security.UserPrincipal;
 
 import java.util.List;
 

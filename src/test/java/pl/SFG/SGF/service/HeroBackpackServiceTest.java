@@ -6,10 +6,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import pl.SFG.SGF.dto.ItemTypeEnum;
-import pl.SFG.SGF.model.Item;
+import pl.SFG.SGF.model.game.Item;
 import pl.SFG.SGF.model.hero.Hero;
 import pl.SFG.SGF.model.hero.HeroBackpack;
-import pl.SFG.SGF.repository.HeroBackpackRepository;
+import pl.SFG.SGF.repository.hero.HeroBackpackRepository;
 
 import java.util.Optional;
 

@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.SFG.SGF.dto.ItemTypeEnum;
 import pl.SFG.SGF.model.hero.HeroBackpack;
-import pl.SFG.SGF.repository.HeroBackpackRepository;
+import pl.SFG.SGF.repository.hero.HeroBackpackRepository;
 
 @Service
 @RequiredArgsConstructor

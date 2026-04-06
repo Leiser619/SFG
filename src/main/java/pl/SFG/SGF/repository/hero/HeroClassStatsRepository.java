@@ -1,4 +1,4 @@
-package pl.SFG.SGF.repository;
+package pl.SFG.SGF.repository.hero;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import pl.SFG.SGF.dto.hero.HeroClass;

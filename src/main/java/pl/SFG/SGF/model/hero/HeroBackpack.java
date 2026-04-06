@@ -3,7 +3,7 @@ package pl.SFG.SGF.model.hero;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import pl.SFG.SGF.model.Item;
+import pl.SFG.SGF.model.game.Item;
 
 @Entity
 @Getter
