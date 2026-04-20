@@ -12,9 +12,6 @@
     public class Enemy {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
-        @Column(nullable = false, name="region_id")
-        private Long regionId;
 
         @Column(nullable = false)
         private String name;
@@ -30,6 +27,10 @@
 
         @Column(nullable = false)
         private int attack;
+
+        @ManyToOne
+        @JoinColumn(name = "region_id")
+        private Region region;
 
         @Column(nullable = false)
         private int magic;
