@@ -1,0 +1,120 @@
+Gameplay tworzymy gildie bohaterow
+mozemy tworzyc nowych bohaterow za oplate mozemy robic misje poszczegolnymi ale tez jako cala mafia/ wojny gildii dolaczenie do sojuszy
+
+
+
+
+Baza:
+
+
+User
+        id
+        email
+        password_hash
+
+
+Postac
+        id
+        avatar
+        name
+        health
+        magic
+        attack_speed
+        shield
+        speed
+        luck
+        attack
+        backpack_space
+        spell_space
+        weapon <List>
+        spell <List>
+        exp
+        level
+
+weapon
+        id
+        avatar
+        attack
+        health
+        magic
+        attack_speed
+        shield
+        speed
+        luck
+
+
+spell_scroll
+        id
+        avatar
+        attack
+        health
+        magic
+        attack_speed
+        shield
+        speed
+        luck
+        additional_action
+
+
+enemy
+            id
+            name
+            health
+            magic
+            attack_speed
+            shield
+            luck
+            attack
+            belonging
+            backpack_space
+            spell_space
+            place_id
+            weapon <List>
+            spell <List>
+
+place
+    id
+    name
+    locations
+
+
+
+    migracje pozniej
+    CREATE TABLE users (
+        id BIGSERIAL PRIMARY KEY,
+        email VARCHAR(255) NOT NULL UNIQUE,
+        password_hash VARCHAR(255) NOT NULL,
+        created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    );
+
+CREATE TABLE Hero (
+    id BIGSERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    speed INT NOT NULL,
+    exp INT NOT NULL,
+    backpack_space INT NOT NULL,
+    spell_space INT NOT NULL,
+    health INT NOT NULL,
+    attack INT NOT NULL,
+    attack_speed REAL NOT NULL,
+    shield INT NOT NULL,
+    magic INT NOT NULL,
+    luck INT NOT NULL,
+    avatar BYTEA NOT NULL,
+    owner_id BIGSERIAL NOTNULL
+);
+
+
+INSERT INTO hero_class_stats(
+hero_class,avatar_url,base_health,base_attack,base_magic,base_speed,base_shield,
+base_luck,base_backpack_space,base_spell_space)VALUES
+('ARCHER','archer.png',  90,  22,  5,  10, 3,   9,   5,  5),
+('MAGE','mage.png',   100,  8,  10, 6,  4,   10,  6,  10),
+('WARRIOR','warrior.png',120, 20,  1,  6,  6,   2,   5,  2),
+('TANK','tank.png',   150, 10,  2,  2,  10,  2,   7,  0)
+
+DROP SCHEMA public CASCADE;
+CREATE SCHEMA public;
+
+
+loader do ladowania danych do walki zeby niepotrzebnie nie tworzyc wielu takich samych zapytan
