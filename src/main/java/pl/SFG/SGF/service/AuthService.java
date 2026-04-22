@@ -37,13 +37,16 @@ public class AuthService {
         userRepository.save(user);
     }
 
-    public AuthResponse login(LoginRequest req) {
+    public String login(LoginRequest req) {
         var auth = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(req.email(), req.password())
         );
 
         var principal = (UserPrincipal) auth.getPrincipal();
-        String token = jwtService.generateToken(principal.getId(), principal.getUsername());
-        return new AuthResponse(token);
+
+        return jwtService.generateToken(
+                principal.getId(),
+                principal.getUsername()
+        );
     }
 }

@@ -15,12 +15,12 @@ public class CorsConfig {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/**")
                         .allowedOrigins(
-                                "http://localhost:5174",  // front
-                                "http://localhost:5173"   // docker
+                                "http://localhost:5174",
+                                "http://localhost:5173"
                         )
                         .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
-                        .exposedHeaders("Authorization");
+                        .allowCredentials(true);
             }
         };
     }
