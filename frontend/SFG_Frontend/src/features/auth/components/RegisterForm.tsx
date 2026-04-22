@@ -1,8 +1,8 @@
 // src/features/auth/components/RegisterForm.tsx
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { registerSchema } from "../registerSchema";
-import type { RegisterFormData } from "../registerSchema";
+import { registerSchema } from "./registerSchema";
+import type { RegisterFormData } from "./registerSchema";
 import { useRegister } from "../hooks";
 
 export default function RegisterForm() {

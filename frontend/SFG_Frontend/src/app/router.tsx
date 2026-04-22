@@ -1,8 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import RegisterPage from "../pages/RegisterPage";
+import LoginPage from "../pages/LoginPage";
 
-const LoginPage = () => <div>Login (do zrobienia)</div>;
 const DashboardPage = () => <div>Dashboard</div>;
 const GamePage = () => <div>Gra</div>;
 const ProfilePage = () => <div>Profil</div>;

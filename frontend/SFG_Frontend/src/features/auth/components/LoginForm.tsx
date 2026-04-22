@@ -1,12 +1,14 @@
-// src/features/auth/components/RegisterForm.tsx
+// src/features/auth/components/LoginForm.tsx
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { registerSchema } from "../registerSchema";
-import type { RegisterFormData } from "../registerSchema";
-import { useRegister } from "../hooks";
+import { registerSchema } from "./registerSchema";
+import type { RegisterFormData } from "./registerSchema";
+import { useLogin } from "../hooks";
+import { useNavigate } from "react-router-dom";
 
-export default function RegisterForm() {
-  const { mutate, isPending, isError, error, isSuccess } = useRegister();
+export default function LoginForm() {
+  const { mutate, isPending, isError, error, isSuccess } = useLogin();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -17,12 +19,16 @@ export default function RegisterForm() {
   });
 
   const onSubmit = (data: RegisterFormData) => {
-    mutate(data);
+    mutate(data,{
+      onSuccess: () => {
+        navigate("/profile");
+      }
+    });
   };
 
   return (
     <div style={{ maxWidth: 400, margin: "0 auto" }}>
-      <h2>Rejestracja</h2>
+      <h2>Logowanie</h2>
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
@@ -43,7 +49,7 @@ export default function RegisterForm() {
         </div>
 
         <button type="submit" disabled={isPending}>
-          {isPending ? "Rejestruję..." : "Zarejestruj"}
+          {isPending ? "Loguje..." : "Zaloguj"}
         </button>
       </form>
 
