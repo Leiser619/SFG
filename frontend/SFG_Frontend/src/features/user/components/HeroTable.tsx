@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useMe } from "../hooks";
+
 const OPTIONS = [
   "Opcja 1",
   "Opcja 2",
@@ -10,31 +10,19 @@ const OPTIONS = [
   "Opcja 7",
 ];
 
+
+
 export default function HeroTable() {
   const [selected, setSelected] = useState<string | null>(null);
 
-  const { data: user } = useMe();
-  if (!user) {
-    return <div>Ładowanie...</div>;
-  }
+
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="bg-gray-100">
       {/* Menu */}
       <nav className="bg-white shadow p-4 flex justify-between">
         <div className="font-bold text-lg">Moja Aplikacja</div>
-        <div className="space-x-4">
-          <button className="hover:text-blue-500">Profil</button>
-          <button className="hover:text-blue-500">Ustawienia</button>
-          <button className="hover:text-blue-500">Wyloguj</button>
-        </div>
       </nav>
-
-      {/* Header użytkownika */}
-      <div className="p-6 bg-white shadow mt-4 mx-4 rounded-2xl">
-        <h1 className="text-2xl font-semibold">{user}</h1>
-      </div>
-
       {/* Tabela */}
       <div className="p-6">
         <div className="bg-white rounded-2xl shadow overflow-hidden">
