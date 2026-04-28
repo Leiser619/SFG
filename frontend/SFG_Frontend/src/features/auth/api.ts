@@ -1,3 +1,4 @@
+//src/features/auth/api.ts
 import { api } from "../../shared/api/axios";
 
 export type RegisterRequest = {
@@ -23,3 +24,7 @@ export const getMe = async () => {
   const res = await api.get("/auth/me");
   return res.data;
 };
+
+export const logout = async () => {
+  await api.post("/auth/logout");
+}; 

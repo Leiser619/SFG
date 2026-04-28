@@ -1,6 +1,7 @@
+//src/features/auth/hooks.ts
 import { useMutation } from "@tanstack/react-query";
 import { useQuery } from "@tanstack/react-query";
-import { register } from "./api";
+import { logout, register } from "./api";
 import { login } from "./api";
 import { getMe } from "./api";
 
@@ -21,5 +22,15 @@ export const useMe = () => {
     queryKey: ["me"],
     queryFn: getMe,
     staleTime: 1000 * 60 * 5 
+  });
+};
+
+
+export const useLogout = () => {
+  return useMutation({
+    mutationFn: logout,
+    onSuccess: () => {
+      window.location.href = "/";
+    },
   });
 };
