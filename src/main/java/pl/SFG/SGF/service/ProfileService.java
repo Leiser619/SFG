@@ -23,6 +23,11 @@ public class ProfileService {
     }
 
 
+    public List<Hero> getAllHeroes(){
+        return heroRepository.findAll();
+    }
+
+
     @Transactional
     public MyHeroesResponses save(MyHeroesResponses myHeroesResponses, Long userId){
         User user = userRepository.getReferenceById(userId);

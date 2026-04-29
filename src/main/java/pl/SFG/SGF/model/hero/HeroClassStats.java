@@ -19,22 +19,28 @@ public class HeroClassStats {
     @Column(nullable = false, name = "avatar_url")
     private String avatarUrl;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name="base_health")
     private int health;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name="base_attack")
     private int attack;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name="base_magic")
     private int magic;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name="base_speed")
     private int speed;
 
-    @Column(nullable = false,name="backpack_space")
+    @Column(nullable = false, name="base_shield")
+    private int shield;
+
+    @Column(nullable = false, name="base_luck")
+    private int luck;
+
+    @Column(nullable = false,name="base_backpack_space")
     private int backpackSpace;
 
-    @Column(nullable = false,name="spell_space")
+    @Column(nullable = false,name="base_spell_space")
     private int spellSpace;
 
 

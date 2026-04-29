@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin
-@RequestMapping("/sfg/heroselect")
+@RequestMapping("api/sfg/heroselect")
 public class ProfileController {
     private final ProfileService profileService;
     @GetMapping
