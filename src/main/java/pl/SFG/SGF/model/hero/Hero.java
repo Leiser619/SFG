@@ -1,5 +1,5 @@
 package pl.SFG.SGF.model.hero;
-
+//TODO wprowadzic zmiane zeby to gildia byla wlascicielaem hero a nie user
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

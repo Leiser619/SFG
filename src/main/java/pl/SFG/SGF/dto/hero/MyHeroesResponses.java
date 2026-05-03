@@ -7,7 +7,5 @@ import jakarta.validation.constraints.Size;
 
 public record MyHeroesResponses(
         String name,
-        int exp,
-        HeroClass heroClass,
-        String avatarUrl
+        HeroClass heroClass
 ) {}

@@ -30,6 +30,11 @@ public class ProfileService {
 
     @Transactional
     public MyHeroesResponses save(MyHeroesResponses myHeroesResponses, Long userId){
+        if (heroRepository.existsByNameAndHeroClass(myHeroesResponses.name(), myHeroesResponses.heroClass())) {
+            throw new RuntimeException("Item tego typu już założony");
+        }
+
+
         User user = userRepository.getReferenceById(userId);
         Hero hero=new Hero();
         hero.setName(myHeroesResponses.name());
@@ -38,7 +43,7 @@ public class ProfileService {
         hero.setOwner(user);
         heroRepository.save(hero);
 
-        return new MyHeroesResponses(hero.getName(), hero.getExp(), hero.getHeroClass(),"url");
+        return new MyHeroesResponses(hero.getName(), hero.getHeroClass());
     }
 
 

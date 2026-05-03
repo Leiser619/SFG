@@ -1,4 +1,5 @@
 package pl.SFG.SGF.model;
+//TODO dodac migracje i w niej pola money i guildName
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -27,4 +28,10 @@ public class User {
 
     @Column(name="created_at",insertable = false,updatable = false)
     private OffsetDateTime createdAt;
+
+    @Column(nullable = false)
+    private int money;
+
+    @Column(name = "guild_name")
+    private String guildName;
 }

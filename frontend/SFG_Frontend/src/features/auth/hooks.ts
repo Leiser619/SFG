@@ -7,7 +7,10 @@ import { getMe } from "./api";
 
 export const useRegister = () => {
   return useMutation({
-    mutationFn: register
+    mutationFn: register,
+    onSuccess: () => {
+      window.location.href = "/";
+    },
   });
 };
 
