@@ -64,6 +64,8 @@ export default function LoginForm() {
           Konto utworzone!
         </p>
       )}
+
+      <button onClick={() => navigate("/register")}>Zarejestruj sie</button>
     </div>
   );
 }

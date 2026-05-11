@@ -4,10 +4,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "./registerSchema";
 import type { RegisterFormData } from "./registerSchema";
 import { useRegister } from "../hooks";
+import { useNavigate } from "react-router-dom";
 
 export default function RegisterForm() {
   const { mutate, isPending, isError, error, isSuccess } = useRegister();
-
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -58,6 +59,7 @@ export default function RegisterForm() {
           Konto utworzone!
         </p>
       )}
+      <button onClick={() => navigate("/")}>Zaloguj sie</button>
     </div>
   );
 }

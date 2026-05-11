@@ -29,9 +29,9 @@ public class User {
     @Column(name="created_at",insertable = false,updatable = false)
     private OffsetDateTime createdAt;
 
-    @Column(nullable = false)
-    private int money;
-
-    @Column(name = "guild_name")
-    private String guildName;
+//    @Column(nullable = false)
+//    private int money;
+//
+//    @Column(name = "guild_name")
+//    private String guildName;
 }

@@ -4,6 +4,7 @@ import RegisterPage from "../pages/RegisterPage";
 import LoginPage from "../pages/LoginPage";
 import ProfilePage from "../pages/ProfilePage";
 import CreatingHero from "../pages/CreatingHero";
+import MapPage from "../pages/MapPage";
 
 const DashboardPage = () => <div>Dashboard</div>;
 const GamePage = () => <div>Gra</div>;
@@ -20,6 +21,10 @@ export const router = createBrowserRouter([
   {
     path: "/register",
     element: <RegisterPage />
+  },
+  {
+    path: "/map",
+    element: <MapPage />
   },
   {
     path: "/dashboard",
