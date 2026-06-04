@@ -1,10 +1,7 @@
 package pl.SFG.SGF.model;
-//TODO dodac migracje i w niej pola money i guildName
-
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.context.annotation.Bean;
 
 import java.time.OffsetDateTime;
 
@@ -29,9 +26,18 @@ public class User {
     @Column(name="created_at",insertable = false,updatable = false)
     private OffsetDateTime createdAt;
 
-//    @Column(nullable = false)
-//    private int money;
-//
-//    @Column(name = "guild_name")
-//    private String guildName;
+    @Column(nullable = false)
+    private int money;
+
+    @Column(name = "guild_name" ,unique=true)
+    private String guildName;
+
+    @Column(name = "mage_points")
+    private int assassinPoints;
+
+    @Column(name = "trader_points")
+    private int merchantPoints;
+
+    @Column(name = "mage_points")
+    private int magePoints;
 }

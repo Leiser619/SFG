@@ -22,6 +22,7 @@ public class Hero {
 
     @Enumerated(EnumType.STRING)
     private HeroClass heroClass;
+
     private int exp;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -30,4 +31,7 @@ public class Hero {
 
     @OneToMany(mappedBy = "hero", cascade = CascadeType.ALL)
     private List<HeroBackpack> items = new ArrayList<>();
+
+
+    private int tiredness;
 }

@@ -38,6 +38,7 @@ public class ProfileService {
         User user = userRepository.getReferenceById(userId);
         Hero hero=new Hero();
         hero.setName(myHeroesResponses.name());
+        hero.setTiredness(0);
         hero.setExp(0);
         hero.setHeroClass(myHeroesResponses.heroClass());
         hero.setOwner(user);
