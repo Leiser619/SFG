@@ -20,7 +20,19 @@ public class Location {
     @Column(name = "location_name")
     private LocationName locationName;
 
-    @OneToMany
-    @JoinColumn(name = "location_id")
+    private String description;
+
+    @Column(nullable = false, name = "bg_url")
+    private String backgroundUrl;
+
+    @Column(nullable = false,name = "required_level")
+    private int requiredLevel;
+
+    @ManyToMany
+    @JoinTable(
+            name = "location_building",
+            joinColumns = @JoinColumn(name = "location_id"),
+            inverseJoinColumns = @JoinColumn(name = "building_id")
+    )
     private List<Building> buildings;
 }

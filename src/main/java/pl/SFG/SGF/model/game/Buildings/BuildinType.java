@@ -11,5 +11,7 @@ public enum BuildinType {
     BANK,
     TOWN_HALL,
     HOSPITAL,
-    DUNGEONS
+    DUNGEONS,
+    TAVERN,
+    ARENA
 }

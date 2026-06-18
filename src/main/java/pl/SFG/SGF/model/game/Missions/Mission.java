@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@Table(name="Mission")
+@Table(name="mission")
 public class Mission {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +19,7 @@ public class Mission {
 
     private String name;
 
-    private String desc;
+    private String description;
 
     private int money;
 

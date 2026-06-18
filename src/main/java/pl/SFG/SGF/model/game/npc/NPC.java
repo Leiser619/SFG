@@ -23,8 +23,12 @@ public class NPC {
     @Column(name = "faction_type")
     private FactionType factionType;
 
-    @OneToMany
-    @JoinColumn(name = "npc_id")
+    @ManyToMany
+    @JoinTable(
+            name = "npc_mission",
+            joinColumns = @JoinColumn(name = "npc_id"),
+            inverseJoinColumns = @JoinColumn(name = "mission_id")
+    )
     private List<Mission> missions;
 
     @Column(name="avatar_url")

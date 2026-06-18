@@ -19,12 +19,16 @@ public class Building {
 
     private String name;
 
-    private String desc;
+    private String description;
     @Enumerated(EnumType.STRING)
     private BuildinType type;
 
-    @OneToMany
-    @JoinColumn(name = "building_id")
+    @ManyToMany
+    @JoinTable(
+            name = "building_npc",
+            joinColumns = @JoinColumn(name = "building_id"),
+            inverseJoinColumns = @JoinColumn(name = "npc_id")
+    )
     private List<NPC> npc;
 
     private String bgUrl;

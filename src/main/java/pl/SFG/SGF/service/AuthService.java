@@ -34,10 +34,10 @@ public class AuthService {
         if (userRepository.existsByEmailIgnoreCase(email)) {
             throw new EntityExistsException("Email już zajęty.");
         }
-
-        if (userRepository.existsByGuildName(req.guildName())) {
-            throw new EntityExistsException("Nazwa glildii już zajęty.");
-        }
+//
+//        if (userRepository.existsByGuildName(req.guildName())) {
+//            throw new EntityExistsException("Nazwa glildii już zajęty.");
+//        }
 
         User user = new User();
         user.setEmail(email);
@@ -47,7 +47,7 @@ public class AuthService {
         user.setAssassinPoints(0);
         user.setMagePoints(0);
         user.setMerchantPoints(0);;
-        user.setGuildName(req.guildName());
+        user.setGuildName(email);
         userRepository.save(user);
     }
 

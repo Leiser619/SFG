@@ -2,11 +2,13 @@ package pl.SFG.SGF.model.game;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.boot.autoconfigure.batch.BatchDataSource;
 
 import java.util.List;
 
 @Entity
 @Data
+@Table(name = "region")
 public class Region {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +23,4 @@ public class Region {
 
     @Column(nullable = false,name = "required_level")
     private int requiredLevel;
-
-    @OneToMany(mappedBy = "region")
-    private List<Enemy> enemies;
 }

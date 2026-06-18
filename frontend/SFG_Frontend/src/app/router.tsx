@@ -5,9 +5,9 @@ import LoginPage from "../pages/LoginPage";
 import ProfilePage from "../pages/ProfilePage";
 import CreatingHero from "../pages/CreatingHero";
 import MapPage from "../pages/MapPage";
+import CityPage from "../pages/locations/CityPage";
+import ArenaPage from "../pages/locations/ArenaPage";
 
-const DashboardPage = () => <div>Dashboard</div>;
-const GamePage = () => <div>Gra</div>;
 
 export const router = createBrowserRouter([
   {
@@ -27,15 +27,15 @@ export const router = createBrowserRouter([
     element: <MapPage />
   },
   {
-    path: "/dashboard",
-    element: <DashboardPage />
-  },
-  {
-    path: "/game",
-    element: <GamePage />
-  },
-  {
     path: "/profile",
     element: <ProfilePage />
+  },
+  {
+    path: "/city/:cityName",
+    element: <CityPage />
+  },
+  {
+    path: "/city/arena",
+    element: <ArenaPage />
   }
 ]);

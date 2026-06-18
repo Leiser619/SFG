@@ -32,7 +32,7 @@ public class User {
     @Column(name = "guild_name" ,unique=true)
     private String guildName;
 
-    @Column(name = "mage_points")
+    @Column(name = "assassin_points")
     private int assassinPoints;
 
     @Column(name = "trader_points")

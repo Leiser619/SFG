@@ -10,6 +10,9 @@ import pl.SFG.SGF.model.game.Region;
 import pl.SFG.SGF.repository.game.EnemyRepository;
 import pl.SFG.SGF.repository.game.RegionRepository;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class EnemyService {
@@ -30,9 +33,24 @@ public class EnemyService {
         enemy.setName(enemyReq.name());
         enemy.setAvatarUrl(enemyReq.avatarUrl());
         enemy.setSpeed(enemyReq.speed());
-        enemy.setRegion(region);
-
-
        return enemyRepository.save(enemy);
     }
+
+
+    public List<Enemy> getAllEnemiesByRegion(String regionName){
+
+
+        List<Enemy> lista =enemyRepository.findAllByRegionName(regionName);
+        for(Enemy e:lista){
+            System.out.println(e);
+        }
+        System.out.println(lista);
+        return lista;
+    }
+
+    public Optional<Enemy> getEnemyById(Long id){
+        return enemyRepository.findById(id);
+    }
+
+
 }

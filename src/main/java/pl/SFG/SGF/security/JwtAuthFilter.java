@@ -12,6 +12,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import pl.SFG.SGF.service.JwtService;
 
+import java.io.IOException;
+
+
 @Component
 @RequiredArgsConstructor
 public class JwtAuthFilter extends OncePerRequestFilter {
@@ -24,39 +27,64 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             HttpServletRequest request,
             HttpServletResponse response,
             FilterChain filterChain
-    ) throws ServletException, java.io.IOException {
+    ) throws ServletException, IOException {
 
         String token = null;
 
-        if (request.getCookies() != null) {
-            for (Cookie cookie : request.getCookies()) {
+        Cookie[] cookies = request.getCookies();
+
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+
+
                 if ("jwt".equals(cookie.getName())) {
                     token = cookie.getValue();
+                    break;
                 }
             }
         }
 
-        if (token == null) {
-            filterChain.doFilter(request, response);
-            return;
+        if (token != null &&
+                SecurityContextHolder.getContext().getAuthentication() == null) {
+
+            try {
+
+                var jws = jwtService.parseAndValidate(token);
+
+                Claims claims = jws.getBody();
+
+                String email = jwtService.extractEmail(claims);
+
+                if (email != null) {
+
+                    UserPrincipal userPrincipal =
+                            (UserPrincipal) userDetailsService.loadUserByUsername(email);
+
+                    UsernamePasswordAuthenticationToken authentication =
+                            new UsernamePasswordAuthenticationToken(
+                                    userPrincipal,
+                                    null,
+                                    userPrincipal.getAuthorities()
+                            );
+
+                    authentication.setDetails(
+                            new WebAuthenticationDetailsSource()
+                                    .buildDetails(request)
+                    );
+
+                    SecurityContextHolder.getContext()
+                            .setAuthentication(authentication);
+
+                }
+
+            } catch (JwtException | IllegalArgumentException e) {
+
+                System.out.println(
+                        "JWT ERROR: " + e.getMessage()
+                );
+            }
         }
 
-        try {
-            var jws = jwtService.parseAndValidate(token);
-            Claims claims = jws.getBody();
-            String email = jwtService.extractEmail(claims);
-
-            if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                var userDetails = userDetailsService.loadUserByUsername(email);
-
-                var authToken = new UsernamePasswordAuthenticationToken(
-                        userDetails, null, userDetails.getAuthorities()
-                );
-                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                SecurityContextHolder.getContext().setAuthentication(authToken);
-            }
-
-        } catch (JwtException | IllegalArgumentException ex) {}
         filterChain.doFilter(request, response);
     }
 }
