@@ -2,6 +2,7 @@ package pl.SFG.SGF.service.game;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.SFG.SGF.dto.hero.HeroClass;
 import pl.SFG.SGF.model.hero.HeroClassStats;
 import pl.SFG.SGF.repository.hero.HeroClassStatsRepository;
 import pl.SFG.SGF.repository.hero.HeroRepository;
@@ -15,5 +16,9 @@ public class HeroStatsService {
 
     public List<HeroClassStats> getAllHeroStats(){
         return heroClassStatsRepository.findAll();
+    }
+
+    public HeroClassStats getStatsByHeroClass(HeroClass hClass){
+        return heroClassStatsRepository.findByHeroClass(hClass);
     }
 }

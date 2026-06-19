@@ -3,6 +3,7 @@ import  { useGetEnemyById , useGetEnemyByRegion} from "../../enemy/hooks";
 import "@fontsource/cinzel/400.css";
 import { useNavigate } from "react-router-dom";
 import ChampionPlace from "./ChampionPlace";
+import type EnemyType from "../../enemy/EnemyType";
 
 
 export default function Arena() {
@@ -24,6 +25,7 @@ export default function Arena() {
         return <div>Brak przeciwników</div>;
     }
 
+//    const hero=new EnemyType();
     return (
 
 
@@ -32,9 +34,9 @@ export default function Arena() {
            <h1 className="mb-8 text-center text-3xl font-bold tracking-wide text-amber-900 font-['Cinzel']"> 
             Arena </h1> 
             <div className="grid grid-cols-3 gap-1 bg-opacity-25">
-            <ChampionPlace champion={enemyByRegionData[0]} />
+            <ChampionPlace champion={enemyByRegionData[0]} isLeft={true} />
             <div></div>
-            <ChampionPlace champion={enemyByRegionData[1]} />
+            <ChampionPlace champion={enemyByRegionData[1]} isLeft={false} />
             </div> 
           </div> 
         </div> 

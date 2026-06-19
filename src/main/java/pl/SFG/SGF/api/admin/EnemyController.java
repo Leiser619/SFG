@@ -23,7 +23,7 @@ public class EnemyController {
 
     @GetMapping("/getEnemiesByRegion/{regionName}")
     public List<Enemy> getEnemiesByRegion(@PathVariable("regionName") String regionName){
-        System.out.println("TO REGION W 1 KROKU"+regionName);
+
         return enemyService.getAllEnemiesByRegion(regionName);
     }
 

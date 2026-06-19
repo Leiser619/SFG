@@ -4,6 +4,8 @@
     import lombok.Builder;
     import lombok.Getter;
     import lombok.Setter;
+    import pl.SFG.SGF.dto.hero.HeroClass;
+    import pl.SFG.SGF.model.hero.Hero;
 
     @Entity
     @Getter
@@ -36,11 +38,14 @@
         private int magic;
 
         @Column(name = "base_speed")
-        private int speed;
+        private float speed;
 
         @Column(name = "base_shield")
         private int shield;
 
         @Column(name = "base_luck")
         private int luck;
+
+        @Column(name = "hero_class")
+        private HeroClass heroClass;
     }

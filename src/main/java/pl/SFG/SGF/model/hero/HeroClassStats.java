@@ -29,7 +29,7 @@ public class HeroClassStats {
     private int magic;
 
     @Column(nullable = false, name="base_speed")
-    private int speed;
+    private float speed;
 
     @Column(nullable = false, name="base_shield")
     private int shield;

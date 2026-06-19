@@ -23,6 +23,7 @@ public class Hero {
     @Enumerated(EnumType.STRING)
     private HeroClass heroClass;
 
+    private int level;
     private int exp;
 
     @ManyToOne(fetch = FetchType.LAZY)
