@@ -1,6 +1,7 @@
 package pl.SFG.SGF.service.game;
 
 import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -48,8 +49,8 @@ public class EnemyService {
         return lista;
     }
 
-    public Optional<Enemy> getEnemyById(Long id){
-        return enemyRepository.findById(id);
+    public Enemy getEnemyById(Long id){
+        return enemyRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Nie ma wroga o id : "+id));
     }
 
 

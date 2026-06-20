@@ -1,5 +1,6 @@
 package pl.SFG.SGF.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,6 +46,11 @@ public class ProfileService {
         heroRepository.save(hero);
 
         return new MyHeroesResponses(hero.getName(), hero.getHeroClass());
+    }
+
+
+    public Hero getHeroById(Long id){
+        return heroRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Nie bohatera o id : "+id));
     }
 
 

@@ -29,7 +29,7 @@ public class EnemyController {
 
 
     @GetMapping("/getEnemyById/{id}")
-    public Optional<Enemy> getEnemyById(@PathVariable Long id){
+    public Enemy getEnemyById(@PathVariable Long id){
         return enemyService.getEnemyById(id);
     }
 

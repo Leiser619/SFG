@@ -4,11 +4,18 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.SFG.SGF.dto.fighting.FighterStatsDto;
 import pl.SFG.SGF.model.game.Enemy;
+import pl.SFG.SGF.model.game.fighting.FightAction;
+import pl.SFG.SGF.model.game.fighting.FightResult;
 import pl.SFG.SGF.model.hero.Hero;
 import pl.SFG.SGF.model.hero.HeroClassGrowth;
 import pl.SFG.SGF.model.hero.HeroClassStats;
+import pl.SFG.SGF.service.ProfileService;
+import pl.SFG.SGF.service.game.EnemyService;
 import pl.SFG.SGF.service.game.HeroClassGrowthService;
 import pl.SFG.SGF.service.game.HeroStatsService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
@@ -16,12 +23,47 @@ import pl.SFG.SGF.service.game.HeroStatsService;
 public class FightCalculator {
     private final HeroClassGrowthService heroClassGrowthService;
     private final HeroStatsService heroStatsService;
+    private final EnemyService enemyService;
+    private final ProfileService profileService;
+
+
+//    public FightResult fight(Long heroId,Long enemyId){
+//        Hero heroForm= profileService.getHeroById(heroId);
+//        Enemy enemForm=enemyService.getEnemyById(enemyId);
+//
+//        FighterStatsDto hero= fromHero(heroForm);
+//        FighterStatsDto enemy=fromEnemy(enemForm);
+//        List<FightAction> fightActions=new ArrayList<>();
+//
+//        FightResult fightResult=new FightResult();
+//        while (hero.getHealth()>=0 || enemy.getHealth()>0){
+//
+//        }
+//
+//
+//
+//
+//
+//
+//        return ;
+//
+//
+//
+//
+//
+//
+//
+//    }
+
+
+
+
+
+
+
+
+
     public FighterStatsDto fromEnemy(Enemy enemy) {
-
-
-
-
-
         return FighterStatsDto.builder()
                 .id(enemy.getId())
                 .name(enemy.getName())
@@ -34,6 +76,10 @@ public class FightCalculator {
                 .luck(enemy.getLuck())
                 .build();
     }
+
+
+
+
 
 
 
@@ -66,23 +112,24 @@ public class FightCalculator {
                 .luck(calculatedHCS.getMagic())
             .build();
     }
+
+
+
+
+
+
 /// This part calculate heroClassStats multiplying it by level
     private HeroClassStats calculateHCS(Hero hero) {
         HeroClassStats hcs=new HeroClassStats();
         HeroClassStats basicHCS= heroStatsService.getStatsByHeroClass(hero.getHeroClass());
         HeroClassGrowth hcg=heroClassGrowthService.findByHeroClass(hero.getHeroClass());
         int multiplier=hero.getLevel();
-
         hcs.setAttack(basicHCS.getAttack()+(multiplier*hcg.getAttackPerLevel()));
         hcs.setLuck(basicHCS.getLuck()+(multiplier*hcg.getLuckPerLevel()));
         hcs.setHealth(basicHCS.getHealth()+(multiplier*hcg.getHealthPerLevel()));
         hcs.setMagic(basicHCS.getMagic()+(multiplier*hcg.getMagicPerLevel()));
         hcs.setShield(basicHCS.getShield()+(multiplier*hcg.getShieldPerLevel()));
         hcs.setSpeed(basicHCS.getSpeed()+(multiplier*hcg.getSpeedPerLevel()));
-
-
-
-
         return hcs;
 
     }
