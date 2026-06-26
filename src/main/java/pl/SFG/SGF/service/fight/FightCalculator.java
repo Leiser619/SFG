@@ -3,9 +3,11 @@ package pl.SFG.SGF.service.fight;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.SFG.SGF.dto.fighting.FighterStatsDto;
+import pl.SFG.SGF.dto.hero.HeroClass;
 import pl.SFG.SGF.model.game.Enemy;
-import pl.SFG.SGF.model.game.fighting.FightAction;
-import pl.SFG.SGF.model.game.fighting.FightResult;
+import pl.SFG.SGF.model.game.Fighting.AttackEvent;
+import pl.SFG.SGF.model.game.Fighting.FightAction;
+import pl.SFG.SGF.model.game.Fighting.FightResult;
 import pl.SFG.SGF.model.hero.Hero;
 import pl.SFG.SGF.model.hero.HeroClassGrowth;
 import pl.SFG.SGF.model.hero.HeroClassStats;
@@ -14,8 +16,7 @@ import pl.SFG.SGF.service.game.EnemyService;
 import pl.SFG.SGF.service.game.HeroClassGrowthService;
 import pl.SFG.SGF.service.game.HeroStatsService;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
 @Service
@@ -25,40 +26,88 @@ public class FightCalculator {
     private final HeroStatsService heroStatsService;
     private final EnemyService enemyService;
     private final ProfileService profileService;
+    Random rand = new Random();
+
+    public FightResult fight(Long heroId, Long enemyId){
+        Hero heroForm= profileService.getHeroById(heroId);
+        Enemy enemForm=enemyService.getEnemyById(enemyId);
+
+        FighterStatsDto hero= fromHero(heroForm);
+        FighterStatsDto enemy=fromEnemy(enemForm);
+        PriorityQueue<AttackEvent> queue =
+                new PriorityQueue<>(
+                        Comparator.comparingDouble(AttackEvent::getTime)
+                );
+
+        FightResult fightResult=new FightResult();
+        while(hero.getHealth() > 0 && enemy.getHealth() > 0){
+
+            AttackEvent event = queue.poll();
+
+            FighterStatsDto attacker = event.getAttacker();
+            FighterStatsDto target = event.getTarget();
+
+            int damage = calculateDamage(attacker, target);
+
+            target.setHealth(
+                    Math.max(0, target.getHealth() - damage)
+            );
+
+            FightAction action = new FightAction();
+
+            action.setAttacker(attacker.getName());
+            action.setTarget(target.getName());
+            action.setDamage(damage);
+            action.setTargetRemainingHp(target.getHealth());
+
+            fightResult.getActions().add(action);
+
+            // jeżeli przeciwnik przeżył, dodaj następny atak
+            if(target.getHealth() > 0){
+
+                double nextTime =
+                        event.getTime() +
+                                (1.0 / attacker.getSpeed());
+
+                queue.add(
+                        new AttackEvent(
+                                attacker,
+                                target,
+                                nextTime
+                        )
+                );
+            }
+        }
 
 
-//    public FightResult fight(Long heroId,Long enemyId){
-//        Hero heroForm= profileService.getHeroById(heroId);
-//        Enemy enemForm=enemyService.getEnemyById(enemyId);
-//
-//        FighterStatsDto hero= fromHero(heroForm);
-//        FighterStatsDto enemy=fromEnemy(enemForm);
-//        List<FightAction> fightActions=new ArrayList<>();
-//
-//        FightResult fightResult=new FightResult();
-//        while (hero.getHealth()>=0 || enemy.getHealth()>0){
-//
-//        }
-//
-//
-//
-//
-//
-//
-//        return ;
-//
-//
-//
-//
-//
-//
-//
-//    }
+
+
+        return fightResult;
+    }
 
 
 
+//  Damage calculator now its pretty simple
+    public int calculateDamage(FighterStatsDto attacker, FighterStatsDto target){
+        int attack;
+        boolean crit=false;
+        if(rand.nextInt(100) <= attacker.getLuck()){
+            crit=true;
+        }else {
+            crit=false;
+        }
 
+        if (attacker.getHeroClass()==HeroClass.MAGE){
+            attack=(attacker.getAttack()+ attacker.getMagic())-(target.getShield()/2);
+        }else{
+            attack=(attacker.getAttack()-(target.getShield()/2));
+        }
+        if(crit){
+            attack=attack*2;
+        }
+        return attack;
 
+    }
 
 
 
@@ -73,6 +122,7 @@ public class FightCalculator {
                 .magic(enemy.getMagic())
                 .speed(enemy.getSpeed())
                 .shield(enemy.getShield())
+                .heroClass(enemy.getHeroClass())
                 .luck(enemy.getLuck())
                 .build();
     }
@@ -104,6 +154,7 @@ public class FightCalculator {
         return FighterStatsDto.builder()
                 .id(hero.getId())
                 .name(hero.getName())
+                .heroClass(hero.getHeroClass())
                 .health(calculatedHCS.getHealth())
                 .attack(calculatedHCS.getAttack())
                 .shield(calculatedHCS.getShield())

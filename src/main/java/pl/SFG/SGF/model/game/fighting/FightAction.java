@@ -1,10 +1,10 @@
-package pl.SFG.SGF.model.game.fighting;
+package pl.SFG.SGF.model.game.Fighting;
 
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 
-@Getter
-@Builder
+@Data
 public class FightAction {
 
     private String attacker;

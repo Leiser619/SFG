@@ -2,9 +2,12 @@ package pl.SFG.SGF.dto.fighting;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
+import pl.SFG.SGF.dto.hero.HeroClass;
 
 @Getter
 @Builder
+@Setter
 public class FighterStatsDto {
 
     private Long id;
@@ -13,6 +16,7 @@ public class FighterStatsDto {
 
     private String avatarUrl;
 
+    private HeroClass heroClass;
     private int health;
 
     private int attack;
