@@ -1,4 +1,4 @@
-package pl.SFG.SGF.model.game.Fighting;
+package pl.SFG.SGF.model.game.fighting;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

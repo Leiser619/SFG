@@ -2,12 +2,12 @@ package pl.SFG.SGF.service.fight;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.SFG.SGF.dto.fighting.DamageDto;
 import pl.SFG.SGF.dto.fighting.FighterStatsDto;
 import pl.SFG.SGF.dto.hero.HeroClass;
 import pl.SFG.SGF.model.game.Enemy;
-import pl.SFG.SGF.model.game.Fighting.AttackEvent;
-import pl.SFG.SGF.model.game.Fighting.FightAction;
-import pl.SFG.SGF.model.game.Fighting.FightResult;
+import pl.SFG.SGF.model.game.fighting.FightAction;
+import pl.SFG.SGF.model.game.fighting.FightResult;
 import pl.SFG.SGF.model.hero.Hero;
 import pl.SFG.SGF.model.hero.HeroClassGrowth;
 import pl.SFG.SGF.model.hero.HeroClassStats;
@@ -28,59 +28,60 @@ public class FightCalculator {
     private final ProfileService profileService;
     Random rand = new Random();
 
+
+
     public FightResult fight(Long heroId, Long enemyId){
         Hero heroForm= profileService.getHeroById(heroId);
         Enemy enemForm=enemyService.getEnemyById(enemyId);
 
         FighterStatsDto hero= fromHero(heroForm);
         FighterStatsDto enemy=fromEnemy(enemForm);
-        PriorityQueue<AttackEvent> queue =
-                new PriorityQueue<>(
-                        Comparator.comparingDouble(AttackEvent::getTime)
-                );
 
         FightResult fightResult=new FightResult();
-        while(hero.getHealth() > 0 && enemy.getHealth() > 0){
 
-            AttackEvent event = queue.poll();
+        FightAction heroFightAction=new FightAction();
+        FightAction enemyFightAction=new FightAction();
 
-            FighterStatsDto attacker = event.getAttacker();
-            FighterStatsDto target = event.getTarget();
 
-            int damage = calculateDamage(attacker, target);
+        float nextHeroAttack = hero.getSpeed();
+        float nextEnemyAttack = enemy.getSpeed();
 
-            target.setHealth(
-                    Math.max(0, target.getHealth() - damage)
-            );
+        while (hero.getHealth() > 0 && enemy.getHealth() > 0) {
 
-            FightAction action = new FightAction();
+            if (nextHeroAttack <= nextEnemyAttack) {
 
-            action.setAttacker(attacker.getName());
-            action.setTarget(target.getName());
-            action.setDamage(damage);
-            action.setTargetRemainingHp(target.getHealth());
+                DamageDto damage = calculateDamage(hero, enemy);
 
-            fightResult.getActions().add(action);
+                heroFightAction.getAttackTime().add(nextHeroAttack);
+                heroFightAction.getDamage().add(damage.getDamage());
+                heroFightAction.getCrit().add(damage.isCrit());
 
-            // jeżeli przeciwnik przeżył, dodaj następny atak
-            if(target.getHealth() > 0){
+                enemy.setHealth(enemy.getHealth() - damage.getDamage());
 
-                double nextTime =
-                        event.getTime() +
-                                (1.0 / attacker.getSpeed());
+                nextHeroAttack += hero.getSpeed();
 
-                queue.add(
-                        new AttackEvent(
-                                attacker,
-                                target,
-                                nextTime
-                        )
-                );
+            } else {
+
+                DamageDto damage = calculateDamage(enemy, hero);
+
+                enemyFightAction.getAttackTime().add(nextEnemyAttack);
+                enemyFightAction.getDamage().add(damage.getDamage());
+                enemyFightAction.getCrit().add(damage.isCrit());
+
+                hero.setHealth(hero.getHealth() - damage.getDamage());
+
+                nextEnemyAttack += enemy.getSpeed();
             }
+        }
+        if(hero.getHealth()>enemy.getHealth()){
+            fightResult.setHeroWon(true);
+        } else {
+            fightResult.setHeroWon(false);
         }
 
 
-
+        fightResult.getActions().add(heroFightAction);
+        fightResult.getActions().add(enemyFightAction);
 
         return fightResult;
     }
@@ -88,7 +89,8 @@ public class FightCalculator {
 
 
 //  Damage calculator now its pretty simple
-    public int calculateDamage(FighterStatsDto attacker, FighterStatsDto target){
+    public DamageDto calculateDamage(FighterStatsDto attacker, FighterStatsDto target){
+        DamageDto damageDto=new DamageDto();
         int attack;
         boolean crit=false;
         if(rand.nextInt(100) <= attacker.getLuck()){
@@ -105,7 +107,14 @@ public class FightCalculator {
         if(crit){
             attack=attack*2;
         }
-        return attack;
+
+        if (attack < 1) {
+            attack = 1;
+        }
+        damageDto.setDamage(attack);
+        damageDto.setCrit(crit);
+
+        return damageDto;
 
     }
 
@@ -160,7 +169,7 @@ public class FightCalculator {
                 .shield(calculatedHCS.getShield())
                 .speed(calculatedHCS.getSpeed())
                 .magic(calculatedHCS.getMagic())
-                .luck(calculatedHCS.getMagic())
+                .luck(calculatedHCS.getLuck())
             .build();
     }
 

@@ -1,9 +1,8 @@
-package pl.SFG.SGF.model.game.Fighting;
+package pl.SFG.SGF.model.game.fighting;
 
-import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -11,5 +10,5 @@ public class FightResult {
 
     public boolean heroWon;
 
-    public List<FightAction> actions;
+    private List<FightAction> actions = new ArrayList<>();
 }

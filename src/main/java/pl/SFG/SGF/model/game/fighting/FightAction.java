@@ -1,21 +1,20 @@
-package pl.SFG.SGF.model.game.Fighting;
+package pl.SFG.SGF.model.game.fighting;
 
-import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
+import pl.SFG.SGF.dto.fighting.FighterStatsDto;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 public class FightAction {
 
-    private String attacker;
+    private FighterStatsDto attacker;
 
-    private String target;
+    private FighterStatsDto target;
 
-    private int damage;
-
-    private boolean critical;
-
-    private int targetRemainingHp;
-
+    private List<Integer> damage = new ArrayList<>();
+    private List<Float> attackTime = new ArrayList<>();
+    private List<Boolean> crit = new ArrayList<>();
 
 }
