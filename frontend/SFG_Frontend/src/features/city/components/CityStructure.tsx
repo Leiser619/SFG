@@ -21,7 +21,7 @@ export default function CityStructure() {
       </div>
     );
   }
-  console.log(city);
+
   return (
     <div className="h-full w-full p-4 bg-cover bg-center"  style={{backgroundImage: `url(${city.backgroundUrl})`}}>
       <div className="h-full w-full rounded-3xl border-4 border-amber-700 bg-black/40  shadow-2xl overflow-hidden bg-opacity-20">

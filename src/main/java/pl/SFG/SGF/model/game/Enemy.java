@@ -46,6 +46,20 @@
         @Column(name = "base_luck")
         private int luck;
 
+        @Column(name = "min_exp")
+        private int minExp;
+
+        @Column(name = "max_exp")
+        private int maxExp;
+
+        @Column(name = "min_gold")
+        private int minGold;
+
+        @Column(name = "max_gold")
+        private int maxGold;
+
+
         @Column(name = "hero_class")
+        @Enumerated(EnumType.STRING)
         private HeroClass heroClass;
     }

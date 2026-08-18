@@ -14,6 +14,8 @@ public class FightAction {
     private FighterStatsDto target;
 
     private List<Integer> damage = new ArrayList<>();
+    private List<Integer> targetHpLeft=new ArrayList<>();
+
     private List<Float> attackTime = new ArrayList<>();
     private List<Boolean> crit = new ArrayList<>();
 

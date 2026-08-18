@@ -42,10 +42,7 @@ public class EnemyService {
 
 
         List<Enemy> lista =enemyRepository.findAllByRegionName(regionName);
-        for(Enemy e:lista){
-            System.out.println(e);
-        }
-        System.out.println(lista);
+
         return lista;
     }
 

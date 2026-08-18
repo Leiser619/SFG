@@ -31,10 +31,8 @@ export default function NewHeroForm() {
   function enoughMoney(money:number):boolean{
 
     if(money < requiredMoney){
-      console.log( "nie ma pieniedzy")
           return true;
       }else{
-      console.log( "sa pieniadze")
         return false;
     }
   }
