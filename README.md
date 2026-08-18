@@ -33,7 +33,16 @@
 
 
 ## Screenshots
- In production
+This is your profile, here you can buy new heroes and manage existing ones.
+<img width="2549" height="1150" alt="obraz" src="https://github.com/user-attachments/assets/dc52a663-a1ab-4241-af2e-37684cff6322" />
+
+<br><br>
+This is an arena where your heroes can fight to earn a small amount of gold and experience.
+<img width="2547" height="1179" alt="obraz" src="https://github.com/user-attachments/assets/a9483e5c-9e6d-4652-a7ee-14839ba3a412" />
+
+
+
+More soon in production
 
 ## Setup
 In produciton
