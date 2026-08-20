@@ -7,7 +7,8 @@ import CreatingHero from "../pages/CreatingHero";
 import MapPage from "../pages/MapPage";
 import CityPage from "../pages/locations/CityPage";
 import ArenaPage from "../pages/locations/ArenaPage";
-
+import ShopPage from "../pages/locations/ShopPage";
+import HeroManagementPage from "../pages/HeroManagementPage";
 
 export const router = createBrowserRouter([
   {
@@ -37,5 +38,17 @@ export const router = createBrowserRouter([
   {
     path: "/city/arena",
     element: <ArenaPage />
-  }
+  },
+  {
+    path:"city/shop",
+    element:<ShopPage/>
+  },
+  {
+    path:"/profile/manage",
+    element:<HeroManagementPage/>
+  },
+
+
+
+
 ]);

@@ -1,7 +1,7 @@
 //src/features/user/hooks.ts  
 import { useMutation } from "@tanstack/react-query";
 import { useQuery } from "@tanstack/react-query";
-import { getMyHeroes, saveNewHero } from "./api";
+import { getMyHeroes, saveNewHero ,getMyHeroById} from "./api";
 import { getAllHeroesStats } from "./api";
 
 ///TODO - dokonczyc pobieranie listy bohaterow
@@ -19,6 +19,7 @@ export const useAllHeroesStats = () => {
   });
 };
 
+
 export const useSaveNewHero = () => {
   return useMutation({
     mutationFn: saveNewHero,
@@ -27,3 +28,12 @@ export const useSaveNewHero = () => {
     },
   });
 };
+
+
+export const useGetMyHeroById=(heroId:number)=>{
+  return useQuery({
+    queryKey: ["hero",heroId],
+    queryFn: ()=>getMyHeroById(heroId),
+
+  });
+}

@@ -8,7 +8,6 @@ export type HeroRequest = {
 };
 
 
-///TODO - dokonczyc pobieranie listy bohaterow
 export const getMyHeroes = async () => {
   const res = await api.get("/sfg/heroselect");
   return res.data;
@@ -21,5 +20,13 @@ export const getAllHeroesStats = async () => {
 
 export const saveNewHero = async(data: HeroRequest)=>{
   const res=await api.post("/sfg/heroselect",data);
+  return res.data;
+}
+
+//getting only hero assigned to user
+export const getMyHeroById = async(heroId: number)=>{
+    const res = await api.get(
+        `/sfg/heroselect/get/getHeroById/${heroId}`
+    );
   return res.data;
 }

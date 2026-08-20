@@ -6,10 +6,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.SFG.SGF.dto.hero.MyHeroesProjection;
 import pl.SFG.SGF.dto.hero.MyHeroesResponses;
+import pl.SFG.SGF.exceptions.AccessDeniedException;
 import pl.SFG.SGF.model.User;
 import pl.SFG.SGF.model.hero.Hero;
 import pl.SFG.SGF.repository.hero.HeroRepository;
 import pl.SFG.SGF.repository.UserRepository;
+import pl.SFG.SGF.security.UserPrincipal;
 
 import java.util.List;
 
@@ -51,6 +53,16 @@ public class ProfileService {
 
     public Hero getHeroById(Long id){
         return heroRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Nie bohatera o id : "+id));
+    }
+
+    public Hero getMyHeroById(UserPrincipal userPrincipal ,Long heroId){
+        Hero hero=heroRepository.findById(heroId).orElseThrow(() -> new EntityNotFoundException("Nie bohatera o id : "+heroId));
+
+        if(!hero.getOwner().getId().equals(userPrincipal.getId())){
+            throw new AccessDeniedException("Brak dostepu do bohatera o id "+heroId+" przez uzytkownika z id "+userPrincipal.getId() );
+        }
+        return hero;
+
     }
 
 

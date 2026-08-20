@@ -1,11 +1,12 @@
 import { useParams } from "react-router-dom";
 import { useGetCityByName } from "../hooks";
+import {useNavigate} from "react-router-dom";
 
 export default function CityStructure() {
   const { cityName } = useParams();
 
   const { data: city, isLoading, error } = useGetCityByName(cityName ?? "");
-
+  const navigate = useNavigate();
   if (isLoading) {
     return (
       <div className="flex h-full items-center justify-center text-amber-100">
@@ -57,7 +58,7 @@ export default function CityStructure() {
                 <div
                   key={index}
                   className="h-40 rounded-2xl border-2 border-amber-400 bg-white/80 p-4 transition-all hover:-translate-y-1 hover:border-violet-500 hover:shadow-lg cursor-pointer"
-                >
+                ><button onClick={() => {navigate('/'+city.buildings[index].name)}}>
                   <div className="flex h-full flex-col items-center justify-center">
                     <div className="mb-3 h-14 w-14 rounded-xl border-2 border-amber-500 bg-cover bg-center"  style={{backgroundImage: `url(${city.buildings[index].imageUrl})`}} />
 
@@ -69,7 +70,7 @@ export default function CityStructure() {
                       {city.buildings[index].description}
                     </p>
 
-                  </div>
+                  </div></button>
                 </div>
               ))}
             </div>
