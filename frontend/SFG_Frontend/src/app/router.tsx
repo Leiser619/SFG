@@ -44,7 +44,7 @@ export const router = createBrowserRouter([
     element:<ShopPage/>
   },
   {
-    path:"/profile/manage",
+    path:"/profile/manage/:heroId",
     element:<HeroManagementPage/>
   },
 

@@ -13,7 +13,8 @@ import java.util.List;
 public interface HeroRepository extends JpaRepository<Hero,Long> {
     List<Hero> findAllByOwnerId(Long ownerId);
     @Query("""
-        SELECT h.name AS name,
+        SELECT h.id AS heroId,
+               h.name AS name,
                h.exp AS exp,
                h.heroClass AS heroClass,
                s.avatarUrl AS avatar

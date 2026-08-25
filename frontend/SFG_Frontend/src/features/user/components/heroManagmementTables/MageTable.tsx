@@ -1,12 +1,13 @@
-//src/features/user/components/heroManagmementTables/TankTable.tsx
+//src/features/user/components/heroManagmementTables/MageTable.tsx
 import "@fontsource/cinzel/400.css";
 import type { fullHeroSchema } from "../schemas/fullHeroSchema";
 import {Stat,ItemSlot} from "./SlotFunctions";
-interface TankTableProps {
+interface MageTableProps {
   hero: fullHeroSchema;
 }
 
-export default function TankTable({ hero }: TankTableProps) {
+
+export default function MageTable({ hero }: MageTableProps) {
   const items = hero.items || [];
 
   const getItem = (index: number) => items.at(index);
@@ -121,15 +122,9 @@ export default function TankTable({ hero }: TankTableProps) {
                 image={getItem(6)}
                 label="Pierścień"
               />
-
               <ItemSlot
-                image={getItem(7)}
-                label="Dodatkowy"
-              />
-
-              <ItemSlot
-                image={getItem(8)}
-                label="Dodatkowy"
+                image={getItem(6)}
+                label="Pierścień 2"
               />
             </div>
           </div>

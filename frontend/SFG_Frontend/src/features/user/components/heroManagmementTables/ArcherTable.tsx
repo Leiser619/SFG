@@ -1,12 +1,13 @@
-//src/features/user/components/heroManagmementTables/TankTable.tsx
+//src/features/user/components/heroManagmementTables/ArcherTable.tsx
 import "@fontsource/cinzel/400.css";
 import type { fullHeroSchema } from "../schemas/fullHeroSchema";
 import {Stat,ItemSlot} from "./SlotFunctions";
-interface TankTableProps {
+interface ArcherTableProps {
   hero: fullHeroSchema;
 }
 
-export default function TankTable({ hero }: TankTableProps) {
+
+export default function ArcherTable({ hero }: ArcherTableProps) {
   const items = hero.items || [];
 
   const getItem = (index: number) => items.at(index);
@@ -120,16 +121,6 @@ export default function TankTable({ hero }: TankTableProps) {
               <ItemSlot
                 image={getItem(6)}
                 label="Pierścień"
-              />
-
-              <ItemSlot
-                image={getItem(7)}
-                label="Dodatkowy"
-              />
-
-              <ItemSlot
-                image={getItem(8)}
-                label="Dodatkowy"
               />
             </div>
           </div>

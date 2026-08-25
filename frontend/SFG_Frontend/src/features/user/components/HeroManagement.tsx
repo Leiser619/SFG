@@ -1,21 +1,19 @@
 //src/features/user/components/HeroManagement.tsx
 import { useGetMyHeroById } from "../hooks";
 import "@fontsource/cinzel/400.css";
+import {useParams} from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import TankTable from "./heroManagmementTables/TankTable";
-import { fullHeroSchema } from "./schemas/fullHeroSchema";
-type Hero = {
-  name: string;
-  heroClass: string;
-  avatar: string;
-  exp: number;
-};
+import MageTable from "./heroManagmementTables/MageTable";
+import WarriorTable from "./heroManagmementTables/WarriorTable";
+import ArcherTable from "./heroManagmementTables/ArcherTable";
+
 
 
 export default function HeroManagement() {
-  
+  const {heroId} = useParams();
 
-  const heroId=1;
+
 
   const { data:hero, isLoading } = useGetMyHeroById(heroId);
   // const navigate = useNavigate();
@@ -33,17 +31,17 @@ export default function HeroManagement() {
                     <TankTable hero={hero} />
                 )}
 
-                {/* {hero.heroClass === "mage" && (
+                {hero.heroClass === "MAGE" && (
                     <MageTable hero={hero} />
                 )}
 
-                {hero.heroClass === "archer" && (
+                {hero.heroClass === "ARCHER" && (
                     <ArcherTable hero={hero} />
                 )}
 
-                {hero.heroClass === "warrior" && (
+                {hero.heroClass === "WARRIOR" && (
                     <WarriorTable hero={hero} />
-                )} */}
+                )}
             </>
         )}
     </div>

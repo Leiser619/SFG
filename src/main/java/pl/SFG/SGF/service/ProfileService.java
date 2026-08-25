@@ -66,7 +66,7 @@ public class ProfileService {
 
         System.out.println(" Hero Id "+heroId  + "Hero owner id "+hero.getOwner().getId());
         if(!hero.getOwner().getId().equals(userPrincipal.getId())){
-            System.out.println("User Id "+userPrincipal.getId());
+
             throw new AccessDeniedException("Brak dostepu do bohatera o id "+heroId+" przez uzytkownika z id "+userPrincipal.getId() );
         }
 
