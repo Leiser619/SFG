@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import pl.SFG.SGF.dto.hero.FullHeroProjection;
 import pl.SFG.SGF.dto.hero.MyHeroesProjection;
 import pl.SFG.SGF.dto.hero.MyHeroesResponses;
 import pl.SFG.SGF.model.User;
@@ -26,8 +27,8 @@ public class ProfileController {
         return profileService.getMyHeros(userPrincipal.getId());
     };
 
-    @GetMapping("/getHeroById")
-    public Hero getMyHeroById(@AuthenticationPrincipal UserPrincipal userPrincipal, @PathVariable Long heroId){
+    @GetMapping("/getHeroById/{heroId}")
+    public FullHeroProjection getMyHeroById(@AuthenticationPrincipal UserPrincipal userPrincipal, @PathVariable Long heroId){
         return profileService.getMyHeroById(userPrincipal,heroId);
 
     }

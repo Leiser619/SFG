@@ -1,12 +1,15 @@
 //src/features/user/components/heroManagmementTables/TankTable.tsx
 
 import "@fontsource/cinzel/400.css";
+import type { fullHeroSchema } from "../schemas/fullHeroSchema";
 
 
+interface TankTableProps {
+    hero: fullHeroSchema;
+}
 
-
-
-export default function TankTable() {
+export default function TankTable({ hero }: TankTableProps) {
+ console.log("to tutaj"+hero.name)
   return (
     <div className="w-full h-full flex items-center justify-center">
       <table className="w-full h-full table-fixed border-collapse border border-gray-400 text-sm text-left text-gray-500">
@@ -16,7 +19,7 @@ export default function TankTable() {
               className="border border-gray-300"
               colSpan={6}
             >
-              Imię bohatera
+              Imię bohatera {hero.name}
             </td>
           </tr>
 

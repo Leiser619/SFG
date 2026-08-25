@@ -1,5 +1,6 @@
 package pl.SFG.SGF.model.hero;
 //TODO wprowadzic zmiane zeby to gildia byla wlascicielaem hero a nie user
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,6 +28,7 @@ public class Hero {
     private int exp;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     @JoinColumn(name="owner_id")
     private User owner;
 

@@ -26,7 +26,8 @@ export const saveNewHero = async(data: HeroRequest)=>{
 //getting only hero assigned to user
 export const getMyHeroById = async(heroId: number)=>{
     const res = await api.get(
-        `/sfg/heroselect/get/getHeroById/${heroId}`
+        `/sfg/heroselect/getHeroById/${heroId}`
     );
+    console.log(res);
   return res.data;
 }
